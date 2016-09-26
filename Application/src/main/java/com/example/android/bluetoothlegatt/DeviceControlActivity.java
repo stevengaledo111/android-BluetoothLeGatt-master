@@ -119,9 +119,7 @@ public class DeviceControlActivity extends Activity {
             } else if (BluetoothLeService.ACTION_DATA_AVAILABLE.equals(action)) {
                 displayData(intent.getStringExtra(BluetoothLeService.EXTRA_DATA));
                 showNotification();
-                unbindService(mServiceConnection);
-                mBluetoothLeService = null;
-                mCharacteristicToRead=null;
+
             }
         }
     };
@@ -152,7 +150,7 @@ public class DeviceControlActivity extends Activity {
                         if ((charaProp | BluetoothGattCharacteristic.PROPERTY_NOTIFY) > 0) {
                             mNotifyCharacteristic = mCharacteristicToRead;
                             mBluetoothLeService.setCharacteristicNotification(
-                                    mCharacteristicToRead, true);
+                                    mCharacteristicToRead, false);
                         }
                         return true;
                     }
@@ -208,6 +206,7 @@ public class DeviceControlActivity extends Activity {
         super.onDestroy();
         unbindService(mServiceConnection);
         mBluetoothLeService = null;
+        mCharacteristicToRead=null;
     }
 
     @Override
