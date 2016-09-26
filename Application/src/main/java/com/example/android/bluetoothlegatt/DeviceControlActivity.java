@@ -338,7 +338,7 @@ public class DeviceControlActivity extends Activity {
                         public void run() {
                             displayData(intent.getStringExtra(BluetoothLeService.EXTRA_DATA));
                             showNotification();
-                            mBluetoothLeService.readCharacteristic(charact);
+                            mBluetoothLeService.readCharacteristic(charact)
 
 
                         }
