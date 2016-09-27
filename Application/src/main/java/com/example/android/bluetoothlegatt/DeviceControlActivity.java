@@ -43,6 +43,10 @@ import android.widget.ExpandableListView;
 import android.widget.SimpleExpandableListAdapter;
 import android.widget.TextView;
 
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -70,6 +74,7 @@ public class DeviceControlActivity extends Activity {
     private boolean mConnected = false;
     private BluetoothGattCharacteristic mNotifyCharacteristic;
     private BluetoothGattCharacteristic mCharacteristicToRead;
+    LineGraphSeries<DataPoint> series;
 
     private final String LIST_NAME = "NAME";
     private final String LIST_UUID = "UUID";
@@ -184,6 +189,23 @@ public class DeviceControlActivity extends Activity {
         getActionBar().setDisplayHomeAsUpEnabled(true);
         Intent gattServiceIntent = new Intent(this, BluetoothLeService.class);
         bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
+
+        double y,x;
+        x= -5.0;
+
+        GraphView graph= (GraphView)findViewById(R.id.graph);
+        series=new LineGraphSeries<>();
+        for (int i=0; i<100; i++)
+        {
+            x=x+0.5;
+            y= 5*x+1;
+            series.appendData(new DataPoint(x,y),true,100);
+
+        }
+        graph.addSeries(series);
+
+
+
     }
 
     @Override

@@ -17,9 +17,9 @@
     <dimen name="vertical_page_margin">@dimen/margin_medium</dimen>
     <string name="app_name">E-textile Notification System</string>
     <string name="ble_not_supported">BLE is not supported</string>
-    <string name="check1">30 minutes</string>
-    <string name="check2">1 hr</string>
-    <string name="check3">2 hrs</string>
+    <string name="check1">1 minute</string>
+    <string name="check2">2 minutes</string>
+    <string name="check3">3 minutes</string>
     <string name="connected">Connected</string>
     <string name="disconnected">Disconnected</string>
     <string name="error_bluetooth_not_supported">Bluetooth not supported.</string>

@@ -141,9 +141,9 @@ containing a value of this type.
         public static final int checkBox=0x7f0a0003;
         public static final int checkBox2=0x7f0a0004;
         public static final int checkBox3=0x7f0a0005;
-        public static final int connection_state=0x7f0a0001;
+        public static final int connection_state=0x7f0a0000;
         public static final int data_value=0x7f0a0002;
-        public static final int device_address=0x7f0a0000;
+        public static final int device_address=0x7f0a0001;
         public static final int device_name=0x7f0a0007;
         public static final int gatt_services_list=0x7f0a0006;
         public static final int menu_connect=0x7f0a0009;
