@@ -19,11 +19,8 @@
     <string name="app_name">E-textile Notification System</string>
     <string name="intro_message">
         <![CDATA[
-        
-            
-            This sample demonstrates how to use the Bluetooth LE Generic Attribute Profile (GATT)
-            to transmit arbitrary data between devices.
-            
+
+           Welcome to E-textile Notification System Application!
         
         ]]>
     </string>
