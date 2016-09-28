@@ -143,8 +143,9 @@ public class DeviceControlActivity extends Activity {
                 public boolean onChildClick(ExpandableListView parent, View v, int groupPosition,
                                             int childPosition, long id) {
                     if (mGattCharacteristics != null) {
-                        mCharacteristicToRead= mGattCharacteristics.get(groupPosition).get(childPosition);
-                        final int charaProp = mCharacteristicToRead.getProperties();
+                        final BluetoothGattCharacteristic characteristic =
+                                mGattCharacteristics.get(groupPosition).get(childPosition);
+                        final int charaProp = characteristic.getProperties();
                         if ((charaProp | BluetoothGattCharacteristic.PROPERTY_READ) > 0) {
                             // If there is an active notification on a characteristic, clear
                             // it first so it doesn't update the data field on the user interface.
@@ -153,13 +154,14 @@ public class DeviceControlActivity extends Activity {
                                         mNotifyCharacteristic, false);
                                 mNotifyCharacteristic = null;
                             }
-                            mBluetoothLeService.readCharacteristic(mCharacteristicToRead);
+                            mBluetoothLeService.readCharacteristic(characteristic);
                         }
                         if ((charaProp | BluetoothGattCharacteristic.PROPERTY_NOTIFY) > 0) {
-                            mNotifyCharacteristic = mCharacteristicToRead;
+                            mNotifyCharacteristic = characteristic;
                             mBluetoothLeService.setCharacteristicNotification(
-                                    mNotifyCharacteristic, true);
+                                    characteristic, true);
                         }
+                        mCharacteristicToRead = characteristic;
                         return true;
                     }
                     return false;
