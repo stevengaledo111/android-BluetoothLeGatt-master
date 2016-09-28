@@ -353,7 +353,7 @@ public class DeviceControlActivity extends Activity {
                 for (int i=0; i<100; i++)
                 {
                     x=x+0.5;
-                    y= Double.parseDouble(temp[1]);
+                    y= Double.parseDouble(temp[1])*x;
                     series.appendData(new DataPoint(x,y),true,100);
 
                 }
@@ -378,7 +378,7 @@ public class DeviceControlActivity extends Activity {
                 for (int i=0; i<100; i++)
                 {
                     x=x+0.5;
-                    y=Double.parseDouble(bpm[1]);
+                    y=Double.parseDouble(bpm[1])*x;
                     series.appendData(new DataPoint(x,y),true,100);
 
                 }
@@ -401,9 +401,10 @@ public class DeviceControlActivity extends Activity {
                     mHandler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
+                            mBluetoothLeService.readCharacteristic(mCharacteristicToRead);
                             displayData(intent.getStringExtra(BluetoothLeService.EXTRA_DATA));
                             showNotification();
-                            mBluetoothLeService.readCharacteristic(mCharacteristicToRead);
+
 
 
                         }
@@ -424,9 +425,10 @@ public class DeviceControlActivity extends Activity {
                         @Override
                         public void run() {
 
+                            mBluetoothLeService.readCharacteristic(mCharacteristicToRead);
                             displayData(intent.getStringExtra(BluetoothLeService.EXTRA_DATA));
                             showNotification();
-                            mBluetoothLeService.readCharacteristic(mCharacteristicToRead);
+
                         }
 
                     },time);
@@ -445,9 +447,10 @@ public class DeviceControlActivity extends Activity {
                         @Override
                         public void run() {
 
+                            mBluetoothLeService.readCharacteristic(mCharacteristicToRead);
                             displayData(intent.getStringExtra(BluetoothLeService.EXTRA_DATA));
                             showNotification();
-                            mBluetoothLeService.readCharacteristic(mCharacteristicToRead);
+
                         }
 
                     },time);
