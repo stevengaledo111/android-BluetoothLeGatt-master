@@ -158,7 +158,7 @@ public class DeviceControlActivity extends Activity {
                         if ((charaProp | BluetoothGattCharacteristic.PROPERTY_NOTIFY) > 0) {
                             mNotifyCharacteristic = mCharacteristicToRead;
                             mBluetoothLeService.setCharacteristicNotification(
-                                    mCharacteristicToRead, true);
+                                    mNotifyCharacteristic, true);
                         }
                         return true;
                     }
@@ -259,9 +259,9 @@ public class DeviceControlActivity extends Activity {
     public void displayData(String data) {
         if (data != null) {
             mDataField.setText(data);
-            parts = data.split("\\t");
-            temp = parts[0].split(":");
-            bpm = parts[1].split(":");
+           // parts = data.split("\\t");
+          //  temp = parts[0].split(":");
+          //  bpm = parts[1].split(":");
 
 
         }
@@ -337,6 +337,7 @@ public class DeviceControlActivity extends Activity {
         intentFilter.addAction(BluetoothLeService.ACTION_DATA_AVAILABLE);
         return intentFilter;
     }
+
     public void OnBtn1Clicked(View view)
     {
         Button button1 = (Button) findViewById(R.id.button);
