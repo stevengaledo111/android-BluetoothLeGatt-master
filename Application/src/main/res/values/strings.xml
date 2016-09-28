@@ -26,7 +26,8 @@
     <string name="check1">1 minute</string>
     <string name="check2">2 minutes</string>
     <string name="check3">3 minutes</string>
-
+    <string name="button1">Graph Temperature</string>
+    <string name="button2">Graph BPM</string>
 
     <string name="unknown_device">Unknown device</string>
     <string name="unknown_characteristic">Unknown characteristic</string>

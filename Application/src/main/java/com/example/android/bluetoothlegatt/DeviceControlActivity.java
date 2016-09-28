@@ -32,12 +32,12 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
-import android.os.Looper;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ExpandableListView;
 import android.widget.SimpleExpandableListAdapter;
@@ -75,6 +75,9 @@ public class DeviceControlActivity extends Activity {
     private BluetoothGattCharacteristic mNotifyCharacteristic;
     private BluetoothGattCharacteristic mCharacteristicToRead;
     LineGraphSeries<DataPoint> series;
+    private String[] parts;
+    private String[] temp;
+    private String[] bpm;
 
     private final String LIST_NAME = "NAME";
     private final String LIST_UUID = "UUID";
@@ -140,8 +143,7 @@ public class DeviceControlActivity extends Activity {
                 public boolean onChildClick(ExpandableListView parent, View v, int groupPosition,
                                             int childPosition, long id) {
                     if (mGattCharacteristics != null) {
-                        mCharacteristicToRead=
-                                mGattCharacteristics.get(groupPosition).get(childPosition);
+                        mCharacteristicToRead= mGattCharacteristics.get(groupPosition).get(childPosition);
                         final int charaProp = mCharacteristicToRead.getProperties();
                         if ((charaProp | BluetoothGattCharacteristic.PROPERTY_READ) > 0) {
                             // If there is an active notification on a characteristic, clear
@@ -189,22 +191,6 @@ public class DeviceControlActivity extends Activity {
         getActionBar().setDisplayHomeAsUpEnabled(true);
         Intent gattServiceIntent = new Intent(this, BluetoothLeService.class);
         bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
-
-        double y,x;
-        x= -5.0;
-
-        GraphView graph= (GraphView)findViewById(R.id.graph);
-        series=new LineGraphSeries<>();
-        for (int i=0; i<100; i++)
-        {
-            x=x+0.5;
-            y= 5*x+1;
-            series.appendData(new DataPoint(x,y),true,100);
-
-        }
-        graph.addSeries(series);
-
-
 
     }
 
@@ -273,6 +259,11 @@ public class DeviceControlActivity extends Activity {
     public void displayData(String data) {
         if (data != null) {
             mDataField.setText(data);
+            parts = data.split("\\t");
+            temp = parts[0].split(":");
+            bpm = parts[1].split(":");
+
+
         }
     }
 
@@ -345,6 +336,56 @@ public class DeviceControlActivity extends Activity {
         intentFilter.addAction(BluetoothLeService.ACTION_GATT_SERVICES_DISCOVERED);
         intentFilter.addAction(BluetoothLeService.ACTION_DATA_AVAILABLE);
         return intentFilter;
+    }
+    public void OnBtn1Clicked(View view)
+    {
+        Button button1 = (Button) findViewById(R.id.button);
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                GraphView graph = (GraphView) findViewById(R.id.graph);
+                graph.setVisibility(View.VISIBLE);
+                double y,x;
+                x=-5.0;
+
+                series=new LineGraphSeries<>();
+                for (int i=0; i<100; i++)
+                {
+                    x=x+0.5;
+                    y= Double.parseDouble(temp[1]);
+                    series.appendData(new DataPoint(x,y),true,100);
+
+                }
+                graph.addSeries(series);
+            }
+        });
+
+    }
+    public void OnBtn2Clicked(View view)
+    {
+        Button button1 = (Button) findViewById(R.id.button);
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                GraphView graph = (GraphView) findViewById(R.id.graph);
+                graph.setVisibility(View.VISIBLE);
+                double y,x;
+                x=-5.0;
+
+                series=new LineGraphSeries<>();
+                for (int i=0; i<100; i++)
+                {
+                    x=x+0.5;
+                    y=Double.parseDouble(bpm[1]);
+                    series.appendData(new DataPoint(x,y),true,100);
+
+                }
+                graph.addSeries(series);
+            }
+        });
+
     }
 
     public void onCheckboxClicked(View view)
