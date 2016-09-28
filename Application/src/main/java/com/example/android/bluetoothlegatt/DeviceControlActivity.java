@@ -293,7 +293,7 @@ public class DeviceControlActivity extends Activity {
             }
             currentServiceData.put(
                     LIST_NAME, serviceName);
-            //currentServiceData.put(LIST_UUID, uuid);
+            currentServiceData.put(LIST_UUID, uuid);
             gattServiceData.add(currentServiceData);
 
             ArrayList<HashMap<String, String>> gattCharacteristicGroupData =
@@ -310,7 +310,7 @@ public class DeviceControlActivity extends Activity {
                 uuid = gattCharacteristic.getUuid().toString();
                 currentCharaData.put(
                         LIST_NAME, SampleGattAttributes.lookup(uuid, unknownCharaString));
-               // currentCharaData.put(LIST_UUID, uuid);
+               currentCharaData.put(LIST_UUID, uuid);
                 gattCharacteristicGroupData.add(currentCharaData);
             }
             mGattCharacteristics.add(charas);
