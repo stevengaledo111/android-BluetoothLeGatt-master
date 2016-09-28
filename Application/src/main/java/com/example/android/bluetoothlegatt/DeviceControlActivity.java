@@ -286,13 +286,13 @@ public class DeviceControlActivity extends Activity {
         for (BluetoothGattService gattService : gattServices) {
             HashMap<String, String> currentServiceData = new HashMap<String, String>();
             uuid = gattService.getUuid().toString();
-            String serviceName = SampleGattAttributes.lookup(uuid, unknownServiceString);
+           // String serviceName = SampleGattAttributes.lookup(uuid, unknownServiceString);
             /*if(serviceName.equals(unknownServiceString))
             {
                 continue;
             }*/
             currentServiceData.put(
-                    LIST_NAME, serviceName);
+                    LIST_NAME,SampleGattAttributes.lookup(uuid, unknownServiceString));
             currentServiceData.put(LIST_UUID, uuid);
             gattServiceData.add(currentServiceData);
 
